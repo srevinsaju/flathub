@@ -1,5 +1,5 @@
 diff --git a/activity.py b/activity.py
-index d91ea44..97c17eb 100755
+index d91ea44..153e333 100755
 --- a/activity.py
 +++ b/activity.py
 @@ -1,4 +1,4 @@
@@ -77,9 +77,11 @@ index d91ea44..97c17eb 100755
  
      def open_image(self, button):
          pygame.event.post(pygame.event.Event(
-@@ -178,24 +179,11 @@ class Activity(activity.Activity):
+@@ -176,26 +177,10 @@ class Activity(activity.Activity):
+     def choose_image_from_journal_cb(self):
+         ''' Create a chooser for image objects '''
          self.image_id = None
-         ##
+-        ##
          self.chooser = None
 -        try:
 -            self.chooser = ObjectChooser(
@@ -100,9 +102,7 @@ index d91ea44..97c17eb 100755
 -                del self.chooser
 -                return self.file_path_temp
 +        self.chooser = DesktopOpenChooser(self)
-+        print(self.chooser)
 +        filepath0 = self.chooser.get_filename()
-+        print(filepath0)
 +        return filepath0
  
      def return_image_to_pygame(self):
