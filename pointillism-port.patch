@@ -1,5 +1,5 @@
 diff --git a/activity.py b/activity.py
-index d91ea44..8378cad 100755
+index d91ea44..1546147 100755
 --- a/activity.py
 +++ b/activity.py
 @@ -1,4 +1,4 @@
@@ -88,16 +88,3 @@ index d91ea44..8378cad 100755
          except TypeError:
              self.chooser = ObjectChooser(
                  None, self,
-@@ -197,9 +198,9 @@ class Activity(activity.Activity):
-                 del self.chooser
-                 return self.file_path_temp
- 
--    def return_image_to_pygame(self):
--        self.file_path_temp = self.choose_image_from_journal_cb()
--        return self.file_path_temp
-+    #def return_image_to_pygame(self):
-+    #    self.file_path_temp = self.choose_image_from_journal_cb()
-+    #    return self.file_path_temp
- 
-     def get_preview(self):
-         return self._pygamecanvas.get_preview()

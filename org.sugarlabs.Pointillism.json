@@ -228,6 +228,10 @@
                 },
                 {
                     "type": "patch",
+                    "path": "sugargame.canvas.patch"
+                },
+                {
+                    "type": "patch",
                     "path": "pointillism-port.patch"
                 },
                 {
