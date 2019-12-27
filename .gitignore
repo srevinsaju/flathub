@@ -1,4 +1,5 @@
 build
 shared-modules
 *.flatpak
-
+.flatpak-builder/*
+repo
