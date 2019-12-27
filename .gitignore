@@ -1,0 +1,4 @@
+build
+shared-modules
+*.flatpak
+
