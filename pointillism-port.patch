@@ -1,0 +1,86 @@
+diff --git a/activity.py b/activity.py
+index d91ea44..7add617 100755
+--- a/activity.py
++++ b/activity.py
+@@ -1,4 +1,4 @@
+-#! /usr/bin/env python
++#! /usr/bin/env python3
+ # -*- coding: utf-8 -*-
+ #
+ # Pointillism
+@@ -24,13 +24,18 @@
+ 
+ import puntillism
+ from gettext import gettext as _
+-from sugar3.datastore import datastore
++# from sugar3.datastore import datastore
+ from sugar3.graphics.objectchooser import ObjectChooser
+ from sugar3.graphics.toolbutton import ToolButton
+ from sugar3.activity.widgets import StopButton
+-from sugar3.activity.widgets import ActivityToolbarButton
++# from sugar3.activity.widgets import ActivityToolbarButton
+ from sugar3.graphics.toolbarbox import ToolbarBox
+-from sugar3.activity import activity
++# from sugar3.activity import activity
++import shutil
++from sugarapp.widgets import SugarCompatibleActivity
++from sugarapp.widgets import ExtendedActivityToolbarButton
++from sugarapp.widgets import DesktopSaveChooser
++from sugarapp.widgets import DesktopOpenChooser
+ from sugar3 import mime
+ import sugargame.canvas
+ import sugargame
+@@ -43,7 +48,7 @@ gi.require_version('Gdk', '3.0')
+ gi.require_version('Gtk', '3.0')
+ 
+ 
+-class Activity(activity.Activity):
++class Activity(SugarCompatibleActivity):
+ 
+     def __init__(self, handle):
+         activity.Activity.__init__(self, handle)
+@@ -69,7 +74,7 @@ class Activity(activity.Activity):
+     def build_toolbar(self):
+ 
+         toolbar_box = ToolbarBox()
+-        activity_button = ActivityToolbarButton(self)
++        activity_button = ExtendedActivityToolbarButton(self)
+         toolbar_box.toolbar.insert(activity_button, -1)
+         activity_button.show()
+ 
+@@ -157,17 +162,13 @@ class Activity(activity.Activity):
+             pygame.USEREVENT, action='savebutton'))
+ 
+     def save_image(self, image):
+-        journalobj = datastore.create()
+-        journalobj.metadata['title'] = _('Pointillism')
+-        journalobj.metadata['mime_type'] = 'image/jpeg'
+-
+-        file_path = os.path.join(
+-            os.environ['SUGAR_ACTIVITY_ROOT'], 'data', 'pointillism.jpg')
+-
+-        pygame.image.save(image, file_path)
+-        journalobj.set_file_path(file_path)
+-        datastore.write(journalobj)
+-        journalobj.destroy()
++        chooser = DesktopSaveChooser(self, filename='untitled.ogg')
++        filename = chooser.get_filename()
++        if filename:
++            # shutil.copyfile(self._ogg_tempfile.name, filename)
++            pygame.image.save(image, filename)
++        if not filename:
++            return False        
+ 
+     def open_image(self, button):
+         pygame.event.post(pygame.event.Event(
+@@ -179,8 +180,8 @@ class Activity(activity.Activity):
+         ##
+         self.chooser = None
+         try:
+-            self.chooser = ObjectChooser(
+-                parent=self, what_filter=mime.GENERIC_TYPE_IMAGE)
++            self.chooser = DesktopOpenChooser( 
++                self, what_filter=mime.GENERIC_TYPE_IMAGE)
+         except TypeError:
+             self.chooser = ObjectChooser(
+                 None, self,
