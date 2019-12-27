@@ -9,7 +9,7 @@
         "--socket=x11",
         "--socket=pulseaudio",
         "--share=ipc",
-        "--device=dri",
+        "--device=all",
         "--env=SUGAR_BUNDLE_ID=org.sugarlabs.Pointillism",
         "--env=SUGAR_BUNDLE_PATH=/app/share/sugar/activities/Pointillism.activity/"
     ],

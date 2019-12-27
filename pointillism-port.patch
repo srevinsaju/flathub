@@ -1,5 +1,5 @@
 diff --git a/activity.py b/activity.py
-index d91ea44..7add617 100755
+index d91ea44..019691c 100755
 --- a/activity.py
 +++ b/activity.py
 @@ -1,4 +1,4 @@
@@ -30,7 +30,7 @@ index d91ea44..7add617 100755
  from sugar3 import mime
  import sugargame.canvas
  import sugargame
-@@ -43,7 +48,7 @@ gi.require_version('Gdk', '3.0')
+@@ -43,10 +48,10 @@ gi.require_version('Gdk', '3.0')
  gi.require_version('Gtk', '3.0')
  
  
@@ -38,7 +38,11 @@ index d91ea44..7add617 100755
 +class Activity(SugarCompatibleActivity):
  
      def __init__(self, handle):
-         activity.Activity.__init__(self, handle)
+-        activity.Activity.__init__(self, handle)
++        SugarCompatibleActivity.__init__(self, handle)
+ 
+         self.max_participants = 1
+         self.file_path_temp = None
 @@ -69,7 +74,7 @@ class Activity(activity.Activity):
      def build_toolbar(self):
  
